@@ -64,14 +64,6 @@ jobs:
         working-directory: lens
         env:
           APPBUNDLEID: "io.kontena.lens-app"
-          APPLEID: ${{ secrets.APPLEID }}
-          APPLEIDPASS: ${{ secrets.APPLEIDPASS }}
-          CSC_LINK: ${{ runner.os == 'macos' && secrets.CSC_LINK || secrets.CSC_LINK_WIN }}
-          CSC_KEY_PASSWORD: ${{ runner.os == 'macos' && secrets.CSC_KEY_PASSWORD || secrets.CSC_KEY_PASSWORD_WIN }}
-          CSC_LINK_WIN: ${{ secrets.CSC_LINK_WIN }}
-          CSC_KEY_PASSWORD_WIN: ${{ secrets.CSC_KEY_PASSWORD_WIN }}
-          WIN_CSC_LINK: ${{ secrets.CSC_LINK_WIN }}
-          WIN_CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD_WIN }}
           CSC_FOR_PULL_REQUEST: false
           DOWNLOAD_ALL_ARCHITECTURES: ${{ runner.os != 'Windows' }}
 
