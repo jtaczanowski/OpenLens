@@ -1,24 +1,22 @@
 const fs = require('fs');
 
-var packagejson = require('./lens/packages/open-lens/package.json');
+const packageJsonOpenLens = require('./lens/open-lens/package.json');
 
-packagejson.build.publish = [{
+packageJsonOpenLens.build.publish = [{
     url: "https://github.com/MuhammedKalkan/OpenLens/releases/download/Latest",
     provider: "generic"
 }];
 
-packagejson.build.win.artifactName = "OpenLens.Setup.${version}.${ext}";
+packageJsonOpenLens.version = `${packageJsonOpenLens.version}-${process.env.BUILD_NUMBER}`;
+packageJsonOpenLens.build.npmRebuild = true;
+packageJsonOpenLens.build.detectUpdateChannel = false;
+packageJsonOpenLens.copyright = [
+    packageJsonOpenLens.copyright,
+    '',
+    'Binary application builds @ MuhammedKalkan/OpenLens',
+    'by Muhammed Kalkan, Jan-Otto Kröpke, Ebby Peter, Xaver Lohmüller'
+].join("\r\n")
 
-if (process.platform != "win32") {
-    // build both x86_64 and arm64 for Linux and Darwin
-    packagejson.scripts['build:app'] = "electron-builder --publish onTag --x64 --arm64";
-}
+console.log(`Set build version: ${packageJsonOpenLens.version}`)
 
-fs.writeFileSync('./lens/packages/open-lens/package.json', JSON.stringify(packagejson));
-
-
-let npmrc = fs.readFileSync('./lens/.npmrc','utf-8');
-npmrc = npmrc.replace("disturl \"","disturl = \"")
-npmrc = npmrc.replace("target \"","target = \"")
-npmrc = npmrc.replace("runtime \"","runtime = \"")
-fs.writeFileSync('./lens/.npmrc',npmrc)
+fs.writeFileSync('./lens/open-lens/package.json', JSON.stringify(packageJsonOpenLens, null, 2));
