@@ -72,7 +72,7 @@ jobs:
           CSC_KEY_PASSWORD_WIN: ${{ secrets.CSC_KEY_PASSWORD_WIN }}
           WIN_CSC_LINK: ${{ secrets.CSC_LINK_WIN }}
           WIN_CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD_WIN }}
-          CSC_FOR_PULL_REQUEST: true
+          CSC_FOR_PULL_REQUEST: false
           DOWNLOAD_ALL_ARCHITECTURES: ${{ runner.os != 'Windows' }}
 
       - name: Calculate SHA256 checksum
